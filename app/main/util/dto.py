@@ -17,3 +17,11 @@ class AuthDto:
         'email': fields.String(required=True, description='The email address'),
         'password': fields.String(required=True, description='The user password '),
     })
+
+
+class TimeTableDto:
+    api = Namespace('TimeTable', description='data used to login in mais system')
+    time_table = api.model('time_table', {
+        'login': fields.String(required=True),
+        'password': fields.String(required=True)
+    })
