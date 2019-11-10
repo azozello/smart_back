@@ -19,6 +19,10 @@ def create_scrappers(username, password):
 
         return formatted_schedule
 
+    def check_user():
+        br = set_up_browser()
+        return login(br)
+
     def set_up_browser():
         # Browser
         brow = mechanize.Browser()
@@ -195,7 +199,7 @@ def create_scrappers(username, password):
 
         return lessons
 
-    return scrap_schedule, login
+    return scrap_schedule, check_user
 
 
 if __name__ == '__main__':

@@ -24,7 +24,6 @@ class Auth:
                     'message': 'email or password does not match.'
                 }
                 return response_object, 401
-
         except Exception as e:
             print(e)
             response_object = {

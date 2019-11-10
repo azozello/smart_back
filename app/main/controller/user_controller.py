@@ -2,10 +2,23 @@ from flask import request
 from flask_restplus import Resource
 
 from ..util.dto import UserDto
+from ..util.dto import TimeTableDto
+
 from ..service.user_service import save_new_user, get_all_users, get_a_user
+from app.main.service.scrap_service import create_scrappers
 
 api = UserDto.api
 _user = UserDto.user
+_time_table = TimeTableDto.time_table
+
+
+@api.route('/check_user')
+class UserCheck(Resource):
+    @api.expect(_time_table, Validate=True)
+    def post(self):
+        data = request.json
+        scrap_time_table, check_user = create_scrappers(data['login'], data['password'])
+        return {'exists': check_user()}
 
 
 @api.route('/')
