@@ -18,7 +18,11 @@ class UserCheck(Resource):
     def post(self):
         data = request.json
         scrap_time_table, check_user = create_scrappers(data['login'], data['password'])
-        return {'exists': check_user()}
+        return {
+            'exists': check_user(),
+            'login': data['login'],
+            'password': data['password']
+        }
 
 
 @api.route('/')
