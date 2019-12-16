@@ -9,16 +9,18 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-# from ..util.cache import Cache
+from ..util.cache import Cache
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 TOKEN_PATH = '/home/lilitgnom/project/smart_back/app/resources/tokens/token.pickle'
 CREDENTIALS_PATH = '/home/lilitgnom/project/smart_back/app/resources/credentials.json'
 
 
+# /Users/denyspanov/Devel/smart_back/app/resources
+# /home/lilitgnom/project/smart_back/app/resources
+
 def get_email_by_id(email_id):
-    # cached_message = Cache().get(f"{email_id}_long")
-    cached_message = None
+    cached_message = Cache().get(f"{email_id}_long")
     if cached_message is not None:
         return cached_message
     else:
@@ -27,7 +29,7 @@ def get_email_by_id(email_id):
         msg = service.users().messages().get(userId="me", id=email_id, format="full", metadataHeaders=None).execute()
         raw_data = str(msg['payload']['parts'][1]['body']['data'])
         decoded = base64.urlsafe_b64decode(raw_data.encode('ASCII'))
-        # Cache().add(f"{email_id}_long", decoded)
+        Cache().add(f"{email_id}_long", decoded)
         return decoded
 
 
@@ -59,20 +61,19 @@ def set_up_credentials():
 
 
 def get_messages(service, messages):
-    # cache = Cache()
+    cache = Cache()
     message_count = 0
     parsed = []
     for message in messages:
         if message_count >= 10:
             break
         else:
-            message_count += append_message(service, None, message, parsed)
+            message_count += append_message(service, cache, message, parsed)
     return parsed
 
 
 def append_message(service, cache, message, parsed):
-    # cached_message = cache.get(f"{message['id']}_short")
-    cached_message = None
+    cached_message = cache.get(f"{message['id']}_short")
     if cached_message is not None:
         parsed.append(json.loads(cached_message))
         return 1
@@ -81,7 +82,7 @@ def append_message(service, cache, message, parsed):
         result_object = {'id': msg['id'], 'message': msg['snippet']}
         fill_message_object(msg, result_object)
         parsed.append(result_object)
-        # cache.add(f"{message['id']}_short", json.dumps(result_object))
+        cache.add(f"{message['id']}_short", json.dumps(result_object))
         return 1
 
 

@@ -2,23 +2,29 @@ import http.cookiejar as cookielib
 
 import bs4
 import mechanize
+import json
 from bs4 import BeautifulSoup
+from ..util.cache import Cache
 
 
 def create_scrappers(username, password):
+    cache = Cache()
+
     def scrap_schedule():
-        br = set_up_browser()
+        cached_time_table = cache.get(username)
+        if cached_time_table is not None:
+            return json.loads(cached_time_table)
+        else:
+            br = set_up_browser()
+            if not login(br):
+                return 'Invalid credentials.'
 
-        if not login(br):
-            return 'Invalid credentials.'
+            time_table = get_time_table(br)
+            days = get_days_rows(time_table)
+            formatted_schedule = format_schedule(days)
+            cache.add(username, json.dumps(formatted_schedule))
 
-        time_table = get_time_table(br)
-
-        days = get_days_rows(time_table)
-
-        formatted_schedule = format_schedule(days)
-
-        return formatted_schedule
+            return formatted_schedule
 
     def check_user():
         br = set_up_browser()
@@ -205,7 +211,7 @@ def create_scrappers(username, password):
 
 
 if __name__ == '__main__':
-    # scrap_timetable, _login = create_scrappers('dp330zm', 'a7W8c7U+')
-    scrap_timetable, _login = create_scrappers('pc170uy', 'senninha123')
+    scrap_timetable, _login = create_scrappers('dp330zm', 'a7W8c7U+')
+    # scrap_timetable, _login = create_scrappers('pc170uy', 'senninha123')
     for day in scrap_timetable():
         print(day)
