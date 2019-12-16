@@ -7,7 +7,7 @@ api = MessagesDto.api
 
 
 @api.route('/')
-class Mail(Resource):
+class Messages(Resource):
 
     def get(self):
         return get_emails_list()
