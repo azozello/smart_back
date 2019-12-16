@@ -3,4 +3,3 @@ __pycache__/
 .idea
 response.json
 test.py
-app/resources/*
