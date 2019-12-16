@@ -16,5 +16,5 @@ api = Api(blueprint,
 
 api.add_namespace(user_ns, path='/user')
 api.add_namespace(scrap_ns, path='/scrap')
-api.add_namespace(mail_ns, path='/mail')
+api.add_namespace(mail_ns, path='/mail_list')
 api.add_namespace(auth_ns)
