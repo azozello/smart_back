@@ -30,3 +30,7 @@ class TimeTableDto:
 class MessagesDto:
     api = Namespace('Messages', description='data used in email system')
     mail = api.model('messages', {})
+
+
+class LessonsDto:
+    api = Namespace('Lessons', description='data used in lessons system')
