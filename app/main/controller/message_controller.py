@@ -1,9 +1,9 @@
 from flask_restplus import Resource
 
 from ..service.mail_service import get_emails_list
-from ..util.dto import MailDto
+from ..util.dto import MessagesDto
 
-api = MailDto.api
+api = MessagesDto.api
 
 
 @api.route('/')

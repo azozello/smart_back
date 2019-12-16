@@ -1,8 +1,8 @@
 from flask import request
 from flask_restplus import Resource
 
-from ..util.dto import TimeTableDto
 from ..service.scrap_service import create_scrappers
+from ..util.dto import TimeTableDto
 
 api = TimeTableDto.api
 _time_table = TimeTableDto.time_table

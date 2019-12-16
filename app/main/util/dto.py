@@ -28,8 +28,13 @@ class TimeTableDto:
 
 
 class MailDto:
-    api = Namespace('Mail', description='data used in mail system')
-    mail = api.model('mail', {
+    api = Namespace('MailList', description='data used in mail system')
+    mail = api.model('mail_list', {
         'login': fields.String(required=True),
         'password': fields.String(required=True)
     })
+
+
+class MessagesDto:
+    api = Namespace('Messages', description='data used in email system')
+    mail = api.model('messages', {})

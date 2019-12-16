@@ -1,19 +1,19 @@
 from __future__ import print_function
 
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-
 import base64
-import pickle
-import os.path
 import json
+import os.path
+import pickle
+
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 
 # from ..util.cache import Cache
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-TOKEN_PATH = '../../resources/tokens/token.pickle'
-CREDENTIALS_PATH = '../../resources/credentials.json'
+TOKEN_PATH = '/home/lilitgnom/project/smart_back/app/resources/tokens/token.pickle'
+CREDENTIALS_PATH = '/home/lilitgnom/project/smart_back/app/resources/credentials.json'
 
 
 def get_email_by_id(email_id):

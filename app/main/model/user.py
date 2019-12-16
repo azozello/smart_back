@@ -1,8 +1,10 @@
+import datetime
+
+import jwt
+
+from app.main.model.blacklist import BlacklistToken
 from .. import db, flask_bcrypt
 from ..config import key
-import datetime
-import jwt
-from app.main.model.blacklist import BlacklistToken
 
 
 class User(db.Model):

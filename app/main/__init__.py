@@ -1,11 +1,9 @@
 from flask import Flask
 from flask import request
-from flask import g
-from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
 
 from .config import config_by_name
-
 from ..main.service.mail_service import get_email_by_id
 from ..main.util.cache import Cache
 

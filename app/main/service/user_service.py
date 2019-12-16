@@ -1,5 +1,5 @@
-import uuid
 import datetime
+import uuid
 
 from app.main import db
 from app.main.model.user import User

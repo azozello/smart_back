@@ -1,11 +1,10 @@
 from flask import request
 from flask_restplus import Resource
 
-from ..util.dto import UserDto
-from ..util.dto import TimeTableDto
-
-from ..service.user_service import save_new_user, get_all_users, get_a_user
 from app.main.service.scrap_service import create_scrappers
+from ..service.user_service import save_new_user, get_all_users, get_a_user
+from ..util.dto import TimeTableDto
+from ..util.dto import UserDto
 
 api = UserDto.api
 _user = UserDto.user

@@ -1,7 +1,8 @@
-import mechanize
 import http.cookiejar as cookielib
-from bs4 import BeautifulSoup
+
 import bs4
+import mechanize
+from bs4 import BeautifulSoup
 
 
 def create_scrappers(username, password):
