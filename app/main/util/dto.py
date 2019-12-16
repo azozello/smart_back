@@ -25,3 +25,11 @@ class TimeTableDto:
         'login': fields.String(required=True),
         'password': fields.String(required=True)
     })
+
+
+class MailDto:
+    api = Namespace('Mail', description='data used in mail system')
+    mail = api.model('mail', {
+        'login': fields.String(required=True),
+        'password': fields.String(required=True)
+    })

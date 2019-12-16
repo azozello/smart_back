@@ -61,6 +61,7 @@ def create_scrappers(username, password):
 
     def get_time_table(br):
         soup = BeautifulSoup(br.open('https://student.tuke.sk/student/rozvrh/show.mais').read(), 'html5lib')
+        print(soup.prettify())
         time_table = soup.find('a', attrs={'name': 'JR_PAGE_ANCHOR_0_2'}).contents[1].contents[0].contents[1].contents
         return time_table[5:len(time_table)]
 
@@ -203,6 +204,7 @@ def create_scrappers(username, password):
 
 
 if __name__ == '__main__':
-    scrap_timetable, _login = create_scrappers('dp330zm', 'a7W8c7U+')
+    # scrap_timetable, _login = create_scrappers('dp330zm', 'a7W8c7U+')
+    scrap_timetable, _login = create_scrappers('pc170uy', 'senninha123')
     for day in scrap_timetable():
         print(day)
