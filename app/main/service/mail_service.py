@@ -27,7 +27,10 @@ def get_email_by_id(email_id):
         credentials = set_up_credentials()
         service = build('gmail', 'v1', credentials=credentials)
         msg = service.users().messages().get(userId="me", id=email_id, format="full", metadataHeaders=None).execute()
-        raw_data = str(msg['payload']['parts'][1]['body']['data'])
+        if 'data' in msg['payload']['body']:
+            raw_data = msg['payload']['body']['data']
+        else:
+            raw_data = str(msg['payload']['parts'][len(msg['payload']['parts']) - 1]['body']['data'])
         decoded = base64.urlsafe_b64decode(raw_data.encode('ASCII'))
         Cache().add(f"{email_id}_long", decoded)
         return decoded
